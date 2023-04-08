@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app_flutter/Question.dart';
 
 void main() => runApp(Quizzler());
 
@@ -26,6 +27,14 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
+List <Question> question = [
+  Question(q: 'You can lead a cow down stairs but not up stairs.' , a: false),
+  Question(q: 'Approximately one quarter of human bones are in the feet.' , a: true),
+  Question(q: 'A slug\'s blood is green.' , a: true),
+];
+
+
+  var questionNumber = 0;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -38,7 +47,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                'This is where the question text will go.',
+                question[questionNumber].question,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -62,10 +71,15 @@ class _QuizPageState extends State<QuizPage> {
                   fontSize: 20.0,
                 ),
               ),
-
               onPressed: () {
                 setState(() {
-                  scoreKeeper.add(Icon(Icons.check, color: Colors.green));
+                  if (question[questionNumber].answer == true) {
+                    scoreKeeper.add(Icon(Icons.check, color: Colors.green));
+                  }
+                  else{
+                    scoreKeeper.add(Icon(Icons.close, color: Colors.red));
+                  }
+                  questionNumber++;
                 });
               },
             ),
@@ -85,7 +99,14 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  scoreKeeper.add(Icon(Icons.close, color: Colors.red));
+                  if (question[questionNumber].answer == false) {
+                    scoreKeeper.add(Icon(Icons.check, color: Colors.green));
+                  }
+                  else{
+                    scoreKeeper.add(Icon(Icons.close, color: Colors.red));
+                  }
+
+                  questionNumber++;
                 });
               },
             ),
@@ -100,7 +121,5 @@ class _QuizPageState extends State<QuizPage> {
 }
 
 /*
-question1: 'You can lead a cow down stairs but not up stairs.', false,
-question2: 'Approximately one quarter of human bones are in the feet.', true,
-question3: 'A slug\'s blood is green.', true,
+
 */
