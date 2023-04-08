@@ -43,10 +43,13 @@ class QuizBrain{
      return _questions[_questionNumber].answer;
    }
    bool isFinished(){
-     if(_questionNumber == 13){
+     if(_questionNumber >= _questions.length - 1){
        return true;
      }
-     return false;
+     else{
+       return false;
+     }
+
    }
   void reset(){
      _questionNumber = 0;
